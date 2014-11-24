@@ -1,6 +1,7 @@
 package com.androyen.interactivestory;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,10 +30,16 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 //Get user's name
                 String name = mNameField.getText().toString();
-                Toast.makeText(MainActivity.this, name, Toast.LENGTH_LONG).show();
+                startStory();
+
             }
         });
 
+    }
+
+    private void startStory() {
+        Intent intent = new Intent(this, StoryActivity.class);
+        startActivity(intent);
     }
 
 
