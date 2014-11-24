@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.androyen.interactivestory.R;
+import com.androyen.interactivestory.model.Page;
 
 public class StoryActivity extends Activity {
+
+
 
     public static final String TAG = StoryActivity.class.getSimpleName();
 
@@ -25,6 +28,8 @@ public class StoryActivity extends Activity {
         }
 
        Log.v(TAG, "value of intent extra is " + name);
+
+
     }
 
 
