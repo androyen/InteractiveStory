@@ -30,15 +30,16 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 //Get user's name
                 String name = mNameField.getText().toString();
-                startStory();
+                startStory(name);
 
             }
         });
 
     }
 
-    private void startStory() {
+    private void startStory(String name) {
         Intent intent = new Intent(this, StoryActivity.class);
+        intent.putExtra("name", name);
         startActivity(intent);
     }
 
