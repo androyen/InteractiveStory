@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ public class StoryActivity extends Activity {
     private TextView mTextView;
     private Button mChoice1;
     private Button mChoice2;
+    private Page mCurrentPage;
 
     public static final String TAG = StoryActivity.class.getSimpleName();
 
@@ -46,28 +48,45 @@ public class StoryActivity extends Activity {
         mChoice1 = (Button)findViewById(R.id.choiceButton1);
         mChoice2 = (Button)findViewById(R.id.choiceButton2);
 
-        loadPage();
+        loadPage(0);
 
 
     }
 
 
-    private void loadPage() {
+    private void loadPage(int choice) {
 
         //get page from story
-        Page page = mStory.getPage(0);
+        mCurrentPage = mStory.getPage(choice);
 
-        Drawable drawable = getResources().getDrawable(page.getImageId());
+        Drawable drawable = getResources().getDrawable(mCurrentPage.getImageId());
         mImageView.setImageDrawable(drawable);
 
-        String pageText = page.getText();
+        String pageText = mCurrentPage.getText();
 
         //Add the name of placeholder included.
         pageText = String.format(pageText, mName);
         mTextView.setText(pageText);
 
-        mChoice1.setText(page.getChoice1().getText());
-        mChoice2.setText(page.getChoice2().getText());
+        mChoice1.setText(mCurrentPage.getChoice1().getText());
+        mChoice2.setText(mCurrentPage.getChoice2().getText());
+
+        mChoice1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               int nextPage = mCurrentPage.getChoice1().getNextPage();
+                loadPage(nextPage);
+            }
+        });
+
+        mChoice2.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                int nextPage = mCurrentPage.getChoice2().getNextPage();
+                loadPage(nextPage);
+            }
+        });
     }
 
 
