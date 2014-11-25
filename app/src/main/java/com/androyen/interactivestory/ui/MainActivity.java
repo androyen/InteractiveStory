@@ -42,6 +42,13 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+    public void onResume() {
+        super.onResume();
+
+        //When the activity is recreated
+        mNameField.setText(""); //Clear out the name field
+    }
+
 
 
 }
